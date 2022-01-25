@@ -1,6 +1,8 @@
 package com.backstage.dao;
 
-import com.frontstage.pojo.*;
+
+import com.backstage.pojo.Field;
+import com.backstage.pojo.Video;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;

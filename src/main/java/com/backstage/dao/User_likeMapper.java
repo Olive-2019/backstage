@@ -1,7 +1,8 @@
 package com.backstage.dao;
 
-import com.frontstage.pojo.User_like;
-import com.frontstage.pojo.Userinfo;
+
+import com.backstage.pojo.User_like;
+import com.backstage.pojo.Userinfo;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;

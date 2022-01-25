@@ -1,8 +1,9 @@
 package com.backstage.dao;
 
-import com.frontstage.pojo.User_comment;
-import com.frontstage.pojo.Userinfo;
-import com.frontstage.pojo.Video;
+import com.backstage.pojo.User_comment;
+import com.backstage.pojo.Userinfo;
+import com.backstage.pojo.Video;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -107,5 +108,7 @@ public interface UserinfoMapper {
 
     @Select("select video.* from userinfo, video where username = #{username} and username = video.uploader")
     Video[] get_upload_video(String username);
+
+
 
 }

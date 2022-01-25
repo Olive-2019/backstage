@@ -1,6 +1,7 @@
 package com.backstage.dao;
 
-import com.frontstage.pojo.User_comment;
+
+import com.backstage.pojo.User_comment;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;

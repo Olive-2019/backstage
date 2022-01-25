@@ -1,6 +1,7 @@
 package com.backstage.dao;
 
-import com.frontstage.pojo.Grade;
+
+import com.backstage.pojo.Grade;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
