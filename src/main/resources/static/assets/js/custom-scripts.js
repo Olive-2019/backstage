@@ -23,40 +23,58 @@
 
             /* MORRIS BAR CHART
 			-----------------------------------------*/
+            var videos=[];
+            var watches=[];
+            var likes=[];
+            var barrages=[];
+
+
+
+            $.ajax({
+                type: "get",
+                url: get_nap()+"video_Display_Page/get_hot_videos",
+                async:false,
+                success: function(data){
+                    videos=data;
+                    for(var i=0;i<videos.length;i++){
+                        $.ajax({
+                            type: "get",
+                            url: get_nap()+"history/get_data_by_ID?videoID="+videos[i]['videoid'],
+                            async:false,
+                            success:function (data) {
+                                watches.push(data[0]);
+                                likes.push(data[1]);
+                                barrages.push(data[2]);
+                            },
+                            error: function (error) {
+                             //  alert(JSON.stringify(error));
+                            }
+                        });
+                    }
+                },
+                error: function (error) {
+                 //   alert(JSON.stringify(error));
+                }
+            });
+
+            var Morris_data=[];
+            for(var i=0;i<videos.length;i++){
+                var temp={
+                    y:videos[i]['title'],
+                    a:watches[i],
+                    b:likes[i],
+                    c:barrages[i]
+                };
+                Morris_data.push(temp);
+            }
+
+
             Morris.Bar({
                 element: 'morris-bar-chart',
-                data: [{
-                    y: '2006',
-                    a: 100,
-                    b: 90
-                }, {
-                    y: '2007',
-                    a: 75,
-                    b: 65
-                }, {
-                    y: '2008',
-                    a: 50,
-                    b: 40
-                }, {
-                    y: '2009',
-                    a: 75,
-                    b: 65
-                }, {
-                    y: '2010',
-                    a: 50,
-                    b: 40
-                }, {
-                    y: '2011',
-                    a: 75,
-                    b: 65
-                }, {
-                    y: '2012',
-                    a: 100,
-                    b: 90
-                }],
+                data: Morris_data,
                 xkey: 'y',
-                ykeys: ['a', 'b'],
-                labels: ['Series A', 'Series B'],
+                ykeys: ['a', 'b','c'],
+                labels: ['播放量', '点赞数','弹幕数'],
 				 barColors: [
     '#A6A6A6','#1cc09f',
     '#A8E9DC' 
@@ -69,101 +87,49 @@
 
             /* MORRIS DONUT CHART
 			----------------------------------------*/
-            Morris.Donut({
-                element: 'morris-donut-chart',
-                data: [{
-                    label: "Download Sales",
-                    value: 12
-                }, {
-                    label: "In-Store Sales",
-                    value: 30
-                }, {
-                    label: "Mail-Order Sales",
-                    value: 20
-                }],
-				   colors: [
-    '#A6A6A6','#1cc09f',
-    '#A8E9DC' 
-  ],
-                resize: true
-            });
+
 
             /* MORRIS AREA CHART
 			----------------------------------------*/
 
-            Morris.Area({
-                element: 'morris-area-chart',
-                data: [{
-                    period: '2010 Q1',
-                    iphone: 2666,
-                    ipad: null,
-                    itouch: 2647
-                }, {
-                    period: '2010 Q2',
-                    iphone: 2778,
-                    ipad: 2294,
-                    itouch: 2441
-                }, {
-                    period: '2010 Q3',
-                    iphone: 4912,
-                    ipad: 1969,
-                    itouch: 2501
-                }, {
-                    period: '2010 Q4',
-                    iphone: 3767,
-                    ipad: 3597,
-                    itouch: 5689
-                }, {
-                    period: '2011 Q1',
-                    iphone: 6810,
-                    ipad: 1914,
-                    itouch: 2293
-                }, {
-                    period: '2011 Q2',
-                    iphone: 5670,
-                    ipad: 4293,
-                    itouch: 1881
-                }, {
-                    period: '2011 Q3',
-                    iphone: 4820,
-                    ipad: 3795,
-                    itouch: 1588
-                }, {
-                    period: '2011 Q4',
-                    iphone: 15073,
-                    ipad: 5967,
-                    itouch: 5175
-                }, {
-                    period: '2012 Q1',
-                    iphone: 10687,
-                    ipad: 4460,
-                    itouch: 2028
-                }, {
-                    period: '2012 Q2',
-                    iphone: 8432,
-                    ipad: 5713,
-                    itouch: 1791
-                }],
-                xkey: 'period',
-                ykeys: ['iphone', 'ipad', 'itouch'],
-                labels: ['iPhone', 'iPad', 'iPod Touch'],
-                pointSize: 2,
-                hideHover: 'auto',
-				  pointFillColors:['#ffffff'],
-				  pointStrokeColors: ['black'],
-				  lineColors:['#A6A6A6','#1cc09f'],
-                resize: true
-            });
-
             /* MORRIS LINE CHART
 			----------------------------------------*/
+
+            var watches=[];
+            var dates=[];
+
+            $.ajax({
+                type: "get",
+                url: get_nap()+"history/get_watches",
+                async:false,
+                success: function(data){
+                    watches=data;
+                },
+                error: function (error) {
+                    alert(JSON.stringify(error));
+                }
+            });
+            var d = new Date();
+            for(var i=1;i<=10;i++){
+                var year=d.getFullYear();
+                year=2022;
+                var month=d.getMonth();
+                month=1;
+                var day=d.getDate()-i;
+                dates.push(year+"-"+month+"-"+day);
+            }
+            var morris_data=[];
+            for(var i=0;i<10;i++){
+                var temp={
+                    y:dates[i],
+                    a:watches[i],
+                }
+                morris_data.push(temp);
+            }
+
             Morris.Line({
                 element: 'morris-line-chart',
-                data: [
-					  { y: '2014-1', a: 50},
-                      { y: '2014-2', a:2},
-                      { y: '2014-3', a:30}
-				],
+                data: morris_data,
                 xkey: 'y',
                 ykeys: ['a'],
                 labels: ['Total Income'],
@@ -206,3 +172,53 @@
     });
 
 }(jQuery));
+
+
+var usernames=[];
+var videos=[];
+var watches=[];
+var likes=[];
+
+$.ajax({
+    type:"get",
+    url:get_nap()+"Userinfo/get_hot_author",
+    async:false,
+    success:function(data){
+        usernames=data;
+        for(var i=0;i<usernames.length;i++){
+            $.ajax({
+                type:"get",
+                url:get_nap()+"Userinfo/get_author_info?username="+usernames[i],
+                async:false,
+                success:function (data) {
+                    videos.push(data[0]);
+                    watches.push(data[1]);
+                    likes.push(data[2]);
+                },
+                error:function (error) {
+                    alert(error)
+                }
+            });
+        }
+    },
+    error:function (error) {
+        alert(error);
+    }
+});
+var example=document.getElementById("tr_example");
+for(var i=0;i<usernames.length;i++){
+    var clone=example.cloneNode(true);
+    var tds=clone.getElementsByTagName("td");
+    tds[0].innerText=i;
+    tds[1].innerText=usernames[i];
+    tds[2].innerText=videos[i];
+    tds[3].innerText=watches[i];
+    tds[4].innerText=likes[i];
+    clone.setAttribute("style","");
+    var table_body=document.getElementById("table_body");
+    table_body.append(clone);
+}
+
+
+
+

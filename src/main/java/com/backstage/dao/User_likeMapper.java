@@ -27,4 +27,9 @@ public interface User_likeMapper {
 
     @Select("select userinfo.*  from user_like , userinfo where liketype = #{liketype} and likeid = #{likeid} and user_like.username = userinfo.username")
     Userinfo[] get_like_this_object_user(int liketype, int likeid);
+    @Select("select count(*) " +
+            "    from user_like where liketype=0 and likeid in " +
+            "        (select videoid from video where username=#{username})")
+    int select_like_num_by_username(String username);
+
 }

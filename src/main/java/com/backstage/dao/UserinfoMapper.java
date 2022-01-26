@@ -113,6 +113,14 @@ public interface UserinfoMapper {
     @Select("select nvl(count(*), 0) from userinfo")
     int get_user_num();
 
-
+    @Select("select * from" +
+            "    (select username from" +
+            "           (select video.uploader as author, video.videoid as a,count(*) as b " +
+            "                from video, history " +
+            "               where video.videoid=history.videoid group by video.videoid,video.uploader),userinfo" +
+            "            where author=username group by username" +
+            "            order by sum(b) desc)" +
+            "    where rownum<6")
+    String[] get_hot_user();
 
 }
