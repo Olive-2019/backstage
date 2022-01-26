@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Date;
+
 @RestController
 @RequestMapping("Userinfo")
 @CrossOrigin("http://localhost:63342")
@@ -47,5 +49,24 @@ public class Userinfo_Controller {
     public void delete_user(String username) {
         userinfoMapper.delete_user(username);
     }
+
+    @RequestMapping("get_percents")
+    public int[] get_percents(){
+        int[] ret=new int[4];
+        int his_num=historyMapper.get_history_num();
+        ret[0]=100*user_likeMapper.get_like_num()/his_num;
+        int ups=videoMapper.get_up_num();
+        int users=userinfoMapper.get_user_num();
+        ret[1]=100*ups/users;
+        int finishes=historyMapper.get_finish_history_num();
+        ret[2]=100*finishes/his_num;
+        Date time=new Date(System.currentTimeMillis());
+        long daytime=1*24*60*60*1000;
+        Date last_week=new Date(time.getTime()-daytime*7);
+        int active_user_num=historyMapper.get_active_user_num(last_week.toLocalDate());
+        ret[3]=100*active_user_num/users;
+        return ret;
+    }
+
 }
 

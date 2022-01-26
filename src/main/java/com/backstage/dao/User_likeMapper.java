@@ -31,5 +31,6 @@ public interface User_likeMapper {
             "    from user_like where liketype=0 and likeid in " +
             "        (select videoid from video where username=#{username})")
     int select_like_num_by_username(String username);
-
+    @Select("select count(*) from user_like where liketype=0")
+    int get_like_num();
 }

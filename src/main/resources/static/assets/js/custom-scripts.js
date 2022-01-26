@@ -201,7 +201,6 @@ $.ajax({
         }
     },
     error:function (error) {
-        alert("SAdasd");
         alert(error);
     }
 });
@@ -220,5 +219,34 @@ for(var i=0;i<usernames.length;i++){
 }
 
 
+$.ajax({
+    type:"get",
+    url:"http://localhost:8881/Userinfo/get_percents",
+    async:false,
+    success:function(data){
+        //alert(data);
+        var t=document.getElementById("easypiechart-blue");
+        t.setAttribute("data-percent",data[0]);
+        var span=t.getElementsByTagName("span")[0];
+        span.innerText=data[0];
 
+        var t=document.getElementById("easypiechart-orange");
+        t.setAttribute("data-percent",data[1]);
+        var span=t.getElementsByTagName("span")[0];
+        span.innerText=data[1];
+
+        var t=document.getElementById("easypiechart-teal");
+        t.setAttribute("data-percent",data[2]);
+        var span=t.getElementsByTagName("span")[0];
+        span.innerText=data[2];
+
+        var t=document.getElementById("easypiechart-red");
+        t.setAttribute("data-percent",data[3]);
+        var span=t.getElementsByTagName("span")[0];
+        span.innerText=data[3];
+    },
+    error:function (error) {
+        alert(error);
+    }
+});
 

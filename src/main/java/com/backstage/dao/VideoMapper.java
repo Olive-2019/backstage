@@ -82,7 +82,7 @@ public interface VideoMapper {
 
     @Select("select * from video")
     Video[] get_all_videos();
-
-
+    @Select("select count(*) from (select distinct uploader from video )")
+    int get_up_num();
 
 }
