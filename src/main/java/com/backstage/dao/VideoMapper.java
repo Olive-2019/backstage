@@ -80,4 +80,9 @@ public interface VideoMapper {
     @Select("select nvl(count(*), 0) from video")
     int get_video_num();
 
+    @Select("select * from video")
+    Video[] get_all_videos();
+
+
+
 }

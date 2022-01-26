@@ -8,8 +8,7 @@
     "use strict";
     var mainApp = {
         initFunction: function () {
-            /*MENU
-            ------------------------------------*/
+            /*MENU ------------------------------------*/
             $('#main-menu').metisMenu();
 
             $(window).bind("load resize", function () {
@@ -23,6 +22,7 @@
 
         initialization: function () {
             mainApp.initFunction();
+
         }
 
     }

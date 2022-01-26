@@ -1,6 +1,7 @@
 package com.backstage.controller;
 
 import com.backstage.dao.VideoMapper;
+import com.backstage.pojo.Video;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,5 +19,14 @@ public class Video_Controller {
         return videoMapper.get_video_num();
     }
 
+    @RequestMapping("get_all_videos")
+    public Video[] get_all_videos() {
+        return videoMapper.get_all_videos();
+    }
+
+    @RequestMapping("delete_video")
+    public void delete_video(int videoid) {
+        videoMapper.delete_video_by_videoid(videoid);
+    }
 
 }
