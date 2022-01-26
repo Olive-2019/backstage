@@ -2,17 +2,20 @@ package com.backstage.dao;
 
 
 import com.backstage.pojo.Field;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface FieldMapper {
 
-    int deleteByPrimaryKey(Integer fieldid);
 
+
+    @Insert("insert into field values(#{fieldid}, #{fieldname})")
     int insert(Field record);
 
-    int insertSelective(Field record);
+
 
     @Select("select * from field where fieldid = #{fieldid}")
     Field selectByPrimaryKey(Integer fieldid);
@@ -20,9 +23,13 @@ public interface FieldMapper {
     @Select("select fieldname from field where fieldid = #{fieldid}")
     String get_fieldname_by_fieldid(int fieldid);
 
-    int updateByPrimaryKeySelective(Field record);
 
-    int updateByPrimaryKey(Field record);
     @Select("select * from field")
     Field[] get_all_fields();
+
+    @Delete("delete from field where fieldid = #{fieldid}")
+    void delete_field(int fieldid);
+
+    @Select("select (nvl(max(fieldid), 0)+1) from field")
+    int get_next_id();
 }

@@ -4,10 +4,7 @@ import com.backstage.pojo.User_comment;
 import com.backstage.pojo.Userinfo;
 import com.backstage.pojo.Video;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface UserinfoMapper {
@@ -112,7 +109,6 @@ public interface UserinfoMapper {
 
     @Select("select nvl(count(*), 0) from userinfo")
     int get_user_num();
-
     @Select("select * from" +
             "    (select username from" +
             "           (select video.uploader as author, video.videoid as a,count(*) as b " +
@@ -122,5 +118,10 @@ public interface UserinfoMapper {
             "            order by sum(b) desc)" +
             "    where rownum<6")
     String[] get_hot_user();
+    @Select("select * from userinfo")
+    Userinfo[] get_all_user();
+
+    @Delete("delete from userinfo where username = #{username}")
+    void delete_user(String username);
 
 }
