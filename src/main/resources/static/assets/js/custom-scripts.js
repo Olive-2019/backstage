@@ -164,18 +164,16 @@
                       { y: '2014-2', a:2},
                       { y: '2014-3', a:30}
 				],
-            
-				 
-      xkey: 'y',
-      ykeys: ['a', 'b'],
-      labels: ['Total Income', 'Total Outcome'],
-      fillOpacity: 0.6,
-      hideHover: 'auto',
-      behaveLikeLine: true,
-      resize: true,
-      pointFillColors:['#ffffff'],
-      pointStrokeColors: ['black'],
-      lineColors:['gray','#1cc09f']
+                xkey: 'y',
+                ykeys: ['a'],
+                labels: ['Total Income'],
+                fillOpacity: 0.6,
+                hideHover: 'auto',
+                behaveLikeLine: true,
+                resize: true,
+                pointFillColors:['#ffffff'],
+                pointStrokeColors: ['black'],
+                lineColors:['gray','#1cc09f']
 	  
             });
            
