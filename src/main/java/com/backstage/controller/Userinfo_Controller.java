@@ -1,9 +1,7 @@
 package com.backstage.controller;
 import com.backstage.dao.UserinfoMapper;
-import com.backstage.pojo.Userinfo;
+import com.backstage.pojo.*;
 import com.backstage.dao.*;
-import com.backstage.pojo.History;
-import com.backstage.pojo.Video;
 import com.backstage.pojo.Video;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,7 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class Userinfo_Controller {
     @Autowired
     private UserinfoMapper userinfoMapper;
-
+    @Autowired
+    private VideoMapper videoMapper;
+    @Autowired
+    private HistoryMapper historyMapper;
+    @Autowired
+    private User_likeMapper user_likeMapper;
     @RequestMapping("get_user_num")
     public int get_user_num() {
         return userinfoMapper.get_user_num();

@@ -178,17 +178,16 @@ var usernames=[];
 var videos=[];
 var watches=[];
 var likes=[];
-
 $.ajax({
     type:"get",
-    url:get_nap()+"Userinfo/get_hot_author",
+    url:"http://localhost:8881/Userinfo/get_hot_author",
     async:false,
     success:function(data){
         usernames=data;
         for(var i=0;i<usernames.length;i++){
             $.ajax({
                 type:"get",
-                url:get_nap()+"Userinfo/get_author_info?username="+usernames[i],
+                url:"http://localhost:8881/Userinfo/get_author_info?username="+usernames[i],
                 async:false,
                 success:function (data) {
                     videos.push(data[0]);
@@ -202,6 +201,7 @@ $.ajax({
         }
     },
     error:function (error) {
+        alert("SAdasd");
         alert(error);
     }
 });
