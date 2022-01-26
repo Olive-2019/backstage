@@ -31,5 +31,8 @@ public interface User_commentMapper {
     @Select("select * from user_comment where commenttype = #{commenttype} and commenttoid = #{commenttoid}")
     User_comment[] get_comments(int commenttype, int commenttoid);
 
+    @Select("select nvl(count(*), 0) from user_comment")
+    int get_comment_num();
+
 
 }

@@ -110,5 +110,9 @@ public interface UserinfoMapper {
     Video[] get_upload_video(String username);
 
 
+    @Select("select nvl(count(*), 0) from userinfo")
+    int get_user_num();
+
+
 
 }

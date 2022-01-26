@@ -77,4 +77,7 @@ public interface VideoMapper {
     @Select("select * from video where fieldid=#{fieldID}")
     Video[] get_videos_by_field(int fieldID);
 
+    @Select("select nvl(count(*), 0) from video")
+    int get_video_num();
+
 }

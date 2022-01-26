@@ -41,30 +41,27 @@
 				
 				
                 <!-- /. ROW  -->
-
+<!--                展示数字的-->
                 <div class="row">
                     <div class="col-md-3 col-sm-12 col-xs-12">
                         <div class="panel panel-primary text-center no-boder bg-color-green green">
                             <div class="panel-left pull-left green">
                                 <i class="fa fa-bar-chart-o fa-5x"></i>
-                                
                             </div>
                             <div class="panel-right pull-right">
-								<h3>8,457</h3>
-                               <strong> Daily Visits</strong>
+								<h3 id = "user_num"></h3>
+                               <strong>用户数量</strong>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-12 col-xs-12">
                         <div class="panel panel-primary text-center no-boder bg-color-blue blue">
-                              <div class="panel-left pull-left blue">
+                            <div class="panel-left pull-left blue">
                                 <i class="fa fa-shopping-cart fa-5x"></i>
-								</div>
-                                
+                            </div>
                             <div class="panel-right pull-right">
-							<h3>52,160 </h3>
-                               <strong> Sales</strong>
-
+                                <h3 id = "barrage_num"></h3>
+                               <strong>弹幕数量</strong>
                             </div>
                         </div>
                     </div>
@@ -72,11 +69,10 @@
                         <div class="panel panel-primary text-center no-boder bg-color-red red">
                             <div class="panel-left pull-left red">
                                 <i class="fa fa fa-comments fa-5x"></i>
-                               
                             </div>
                             <div class="panel-right pull-right">
-							 <h3>15,823 </h3>
-                               <strong> Comments </strong>
+							    <h3 id = "comment_num"></h3>
+                               <strong>评论数量</strong>
 
                             </div>
                         </div>
@@ -85,11 +81,10 @@
                         <div class="panel panel-primary text-center no-boder bg-color-brown brown">
                             <div class="panel-left pull-left brown">
                                 <i class="fa fa-users fa-5x"></i>
-                                
                             </div>
                             <div class="panel-right pull-right">
-							<h3>36,752 </h3>
-                             <strong>No. of Visits</strong>
+							    <h3 id = 'video_num'></h3>
+                                <strong>视频数量</strong>
 
                             </div>
                         </div>
@@ -330,6 +325,10 @@
 	
     <!-- Custom Js -->
     <script src="assets/js/custom-scripts.js"></script>
+
+
+    <script src = 'js/Common.js'></script>
+    <script src = 'js/index.js'></script>
 
 
 </body>
