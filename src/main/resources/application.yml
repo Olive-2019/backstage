@@ -5,10 +5,10 @@ server:
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    driver-class-name: oracle.jdbc.OracleDriver #com.mysql.cj.jdbc.Driver
-    url: jdbc:oracle:thin:@localhost:1521:orcl #jdbc:mysql://localhost:3306/ssm?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    username: project
-    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver #oracle.jdbc.OracleDriver #
+    url: jdbc:mysql://localhost:3306/echart?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true&useSSL=false #jdbc:oracle:thin:@localhost:1521:orcl #
+    username: root
+    password: Lam
     hikari:
       minimum-idle: 5
       idle-timeout: 180000

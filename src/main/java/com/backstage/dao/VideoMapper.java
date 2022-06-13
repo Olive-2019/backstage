@@ -37,7 +37,7 @@ public interface VideoMapper {
     /**
      * @ Description: 获取下一个videoid，用于分配videoid
     */
-    @Select("select nvl(max(videoid), 0) + 1 from video")
+    @Select("select IFNULL(max(videoid), 0) + 1 from video")
     int get_next_videoid();
 
     /**
@@ -77,12 +77,12 @@ public interface VideoMapper {
     @Select("select * from video where fieldid=#{fieldID}")
     Video[] get_videos_by_field(int fieldID);
 
-    @Select("select nvl(count(*), 0) from video")
+    @Select("select IFNULL(count(*), 0) from video")
     int get_video_num();
 
     @Select("select * from video")
     Video[] get_all_videos();
-    @Select("select count(*) from (select distinct uploader from video )")
+    @Select("select count(*) from (select distinct uploader from video) as tmp")
     int get_up_num();
 
 }

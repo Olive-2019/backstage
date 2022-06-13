@@ -107,17 +107,17 @@ public interface UserinfoMapper {
     Video[] get_upload_video(String username);
 
 
-    @Select("select nvl(count(*), 0) from userinfo")
+    @Select("select IFNULL(count(*), 0) from userinfo")
     int get_user_num();
-    @Select("select * from" +
-            "    (select username from" +
-            "           (select video.uploader as author, video.videoid as a,count(*) as b " +
-            "                from video, history " +
-            "               where video.videoid=history.videoid group by video.videoid,video.uploader),userinfo" +
-            "            where author=username group by username" +
-            "            order by sum(b) desc)" +
-            "    where rownum<6")
-    String[] get_hot_user();
+//    @Select("select * from" +
+//            " (select username from" +
+//            " (select video.uploader as author, video.videoid as a,count(*) as b" +
+//            "  from video, history" +
+//            "  where video.videoid=history.videoid group by video.videoid,video.uploader) as tmp1 ,userinfo" +
+//            "  where author=username group by username" +
+//            "  order by sum(b) desc) as tmp2" +
+//            "  where rownum<6")
+//    String[] get_hot_user();
     @Select("select * from userinfo")
     Userinfo[] get_all_user();
 

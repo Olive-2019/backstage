@@ -16,7 +16,7 @@ public interface User_commentMapper {
     @Insert("insert into user_comment values(#{username}, #{commentid}, #{content}, #{commenttype}, #{commenttoid})")
     int insert(User_comment record);
 
-    @Select("select nvl(max(commentid),0)+1 from user_comment")
+    @Select("select IFNULL(max(commentid),0)+1 from user_comment")
     int get_next_comment_id();
 
     @Select("select count(*) from user_comment where commentid = #{commentid}")
@@ -31,7 +31,7 @@ public interface User_commentMapper {
     @Select("select * from user_comment where commenttype = #{commenttype} and commenttoid = #{commenttoid}")
     User_comment[] get_comments(int commenttype, int commenttoid);
 
-    @Select("select nvl(count(*), 0) from user_comment")
+    @Select("select IFNULL(count(*), 0) from user_comment")
     int get_comment_num();
 
 

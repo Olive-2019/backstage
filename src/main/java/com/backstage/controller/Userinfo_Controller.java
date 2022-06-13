@@ -26,10 +26,10 @@ public class Userinfo_Controller {
     public int get_user_num() {
         return userinfoMapper.get_user_num();
     }
-    @RequestMapping("get_hot_author")
-    public String[] get_hot_author(){
-        return userinfoMapper.get_hot_user();
-    }
+//    @RequestMapping("get_hot_author")
+//    public String[] get_hot_author(){
+//        return userinfoMapper.get_hot_user();
+//    }
     @RequestMapping("get_author_info")
     public int[] get_author_info(String username){
         int[] ret=new int[3];
@@ -54,17 +54,17 @@ public class Userinfo_Controller {
     public int[] get_percents(){
         int[] ret=new int[4];
         int his_num=historyMapper.get_history_num();
-        ret[0]=100*user_likeMapper.get_like_num()/his_num;
+        if (his_num != 0) ret[0]=100*user_likeMapper.get_like_num()/his_num;
         int ups=videoMapper.get_up_num();
         int users=userinfoMapper.get_user_num();
-        ret[1]=100*ups/users;
+        if (users != 0) ret[1]=100*ups/users;
         int finishes=historyMapper.get_finish_history_num();
         ret[2]=100*finishes/his_num;
         Date time=new Date(System.currentTimeMillis());
         long daytime=1*24*60*60*1000;
         Date last_week=new Date(time.getTime()-daytime*7);
         int active_user_num=historyMapper.get_active_user_num(last_week.toLocalDate());
-        ret[3]=100*active_user_num/users;
+        if (users != 0) ret[3]=100*active_user_num/users;
         return ret;
     }
 

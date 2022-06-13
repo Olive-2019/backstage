@@ -16,9 +16,9 @@ public interface BarrageMapper {
     @Select("select * from barrage where videoID=#{videoID}")
     Barrage[] get_barrage_by_video(int videoID);
 
-    @Select("select nvl(max(barrageid),0)+1 from barrage")
+    @Select("select IFNULL(max(barrageid),0)+1 from barrage")
     int get_barrage_ID();
 
-    @Select("select nvl(count(*), 0) from barrage")
+    @Select("select count(*) from barrage")
     int get_barrage_num();
 }

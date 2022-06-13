@@ -30,6 +30,6 @@ public interface FieldMapper {
     @Delete("delete from field where fieldid = #{fieldid}")
     void delete_field(int fieldid);
 
-    @Select("select (nvl(max(fieldid), 0)+1) from field")
+    @Select("select (IFNULL(max(fieldid), 0)+1) from field")
     int get_next_id();
 }
