@@ -21,10 +21,9 @@ function get_data() {
     var all_field = [];
     for (var key in raw_data) {
         var all_video = [];
-        console.log(key);
+        // console.log(key);
         for (var video_title in raw_data[key]) {
-            var video;
-            video = {children : [], name: video_title};
+            var video = {children : [], name: video_title};
             all_video.push(video);
         }
         var field = {children: all_video, name:key};

@@ -50,4 +50,29 @@ public class Field_Controller {
     public void delete_field(int fieldid) {
         fieldMapper.delete_field(fieldid);
     }
+
+    @RequestMapping("get_field_name")
+    public String[] get_field_name() {
+        return fieldMapper.get_fieldname();
+    }
+
+    @RequestMapping("get_video_num")
+    public int[][] get_video_num() {
+        String[] dates = videoMapper.get_uploadtime();
+        int[][] ans = new int[dates.length][];
+        for (int i = 0; i < dates.length; ++i) {
+            ans[i] = videoMapper.get_video_num_by_year(dates[i]);
+        }
+        return ans;
+    }
+    @RequestMapping("get_cur_video_num")
+    public int[][] get_cur_video_num() {
+        String[] dates = videoMapper.get_uploadtime();
+        int[][] ans = new int[dates.length][];
+        for (int i = 0; i < dates.length; ++i) {
+            ans[i] = videoMapper.get_video_num_by_cur_time(dates[i]);
+        }
+        return ans;
+    }
+
 }

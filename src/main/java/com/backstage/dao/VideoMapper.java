@@ -98,6 +98,7 @@ public interface VideoMapper {
 
     @Select("select min(left(uploadtime, 7)) from video")
     String get_min_uploadtime();
+
     @Select("select distinct left(uploadtime, 7) as ym from video order by ym asc;")
     String[] get_uploadtime();
 
@@ -106,4 +107,10 @@ public interface VideoMapper {
 
     @Select("select title from video where fieldid = #{field_id}")
     String[] get_video_title_by_field_id(int field_id);
+
+    @Select("select count(*) from(select fieldname, left(uploadtime, 7) as ym from video, field where video.fieldid = field.fieldid) as tmp where ym < #{time} group by fieldname order by fieldname desc")
+    int[] get_video_num_by_year(String time);
+    @Select("select count(*) from(select fieldname, left(uploadtime, 7) as ym from video, field where video.fieldid = field.fieldid) as tmp where ym = #{time} group by fieldname order by fieldname desc")
+    int[] get_video_num_by_cur_time(String time);
+
 }

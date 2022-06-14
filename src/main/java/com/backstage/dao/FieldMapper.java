@@ -23,6 +23,8 @@ public interface FieldMapper {
     @Select("select fieldname from field where fieldid = #{fieldid}")
     String get_fieldname_by_fieldid(int fieldid);
 
+    @Select("select fieldname from field order by fieldname desc")
+    String[] get_fieldname();
 
     @Select("select * from field")
     Field[] get_all_fields();

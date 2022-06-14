@@ -92,4 +92,8 @@ public class Video_Controller {
         return ret;
     }
 
+    @RequestMapping("get_upload_ym")
+    public String[] get_upload_ym() {
+        return videoMapper.get_uploadtime();
+    }
 }

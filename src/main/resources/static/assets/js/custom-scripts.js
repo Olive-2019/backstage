@@ -106,7 +106,7 @@
                     watches=data;
                 },
                 error: function (error) {
-                    alert(JSON.stringify(error));
+                    // alert(JSON.stringify(error));
                 }
             });
             var d = new Date();
@@ -195,13 +195,13 @@ $.ajax({
                     likes.push(data[2]);
                 },
                 error:function (error) {
-                    alert(error)
+                    // alert(error)
                 }
             });
         }
     },
     error:function (error) {
-        alert(error);
+        // alert(error);
     }
 });
 var example=document.getElementById("tr_example");
@@ -246,7 +246,7 @@ $.ajax({
         span.innerText=data[3];
     },
     error:function (error) {
-        alert(error);
+        // alert(error);
     }
 });
 
