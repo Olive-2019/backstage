@@ -22,6 +22,10 @@ public class Userinfo_Controller {
     private HistoryMapper historyMapper;
     @Autowired
     private User_likeMapper user_likeMapper;
+
+    @Autowired
+    private  FollowMapper followMapper;
+
     @RequestMapping("get_user_num")
     public int get_user_num() {
         return userinfoMapper.get_user_num();
@@ -66,6 +70,31 @@ public class Userinfo_Controller {
         int active_user_num=historyMapper.get_active_user_num(last_week.toLocalDate());
         if (users != 0) ret[3]=100*active_user_num/users;
         return ret;
+    }
+    @RequestMapping("get_all_username")
+    public String[][] get_all_username() {
+        Userinfo[] users = userinfoMapper.get_all_user();
+        String[][] ans = new String[2][users.length];
+        int i = 0;
+        for (Userinfo user : users) {
+            ans[0][i] = user.getUsername();
+            ans[1][i] = user.getAdmin().toString();
+            i++;
+        }
+        return ans;
+    }
+
+    @RequestMapping("get_all_link")
+    public String[][] get_all_link() {
+        Follow[] link = followMapper.get_all_link();
+        String[][] ans = new String[2][link.length];
+        int i = 0;
+        for (Follow link_one : link) {
+            ans[0][i] = link_one.getUsernamefollowed();
+            ans[1][i] = link_one.getUsernamefollower();
+            i++;
+        }
+        return ans;
     }
 
 }

@@ -127,4 +127,6 @@ public interface UserinfoMapper {
     @Delete("delete from userinfo where username = #{username}")
     void delete_user(String username);
 
+
+
 }

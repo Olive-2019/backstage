@@ -1,20 +1,42 @@
 window.onload = function init() {
     init_chart();
 }
-var node, link = [], username_list;
+var nodes, links = [], username_list;
 function get_node() {
-    var url = get_nap() + "User_Comment/get_all_username";
+    var url = get_nap() + "Userinfo/get_all_username";
     $.ajax({
         type: "get",
         url: url,
         async: false,
         success: function(data){
-            node = [];
+            nodes = [];
             username_list = data;
             var i = 0;
-            for (i = 0; i < data.length; ++i) {
-                var tmp = {category:0,name:data[i]};
-                node.push(tmp);
+            for (i = 0; i < data[0].length; ++i) {
+                var ca;
+                if (data[1][i] == '0') ca = 0;
+                else ca = 1;
+                var tmp = {category:ca, name:data[0][i], label : data[0][i]};
+                nodes.push(tmp);
+            }
+        },
+        error: function (error) {
+            alert(JSON.stringify(error));
+        }
+    });
+}
+function get_link() {
+    var url = get_nap() + "Userinfo/get_all_link";
+    $.ajax({
+        type: "get",
+        url: url,
+        async: false,
+        success: function(data){
+            links = [];
+            var i = 0;
+            for (i = 0; i < data[0].length; ++i) {
+                var tmp = {source : data[0][i],  target : data[1][i], weight: 1, name:'关注'};
+                links.push(tmp);
             }
         },
         error: function (error) {
@@ -24,33 +46,39 @@ function get_node() {
 }
 function init_chart() {
     get_node();
-    alert(node);
+    get_link();
+    var title = "用户关系图";
+    var categories= [{name:"管理员"},{name:"普通用户"}];
     var chartDom = document.getElementById('chart');
     var myChart = echarts.init(chartDom);
     var option = {
         title: {
-            text: '用户关系图',
-            subtext: 'Default layout',
+            text: title,
+            subtext: 'Circular layout',
             top: 'bottom',
             left: 'right'
         },
         tooltip: {},
         legend: [
             {
-                // selectedMode: 'single',
-                data: username_list
+                data: categories.map(function (a) {
+                    return a.name;
+                })
             }
         ],
-        animationDuration: 1500,
+        animationDurationUpdate: 1500,
         animationEasingUpdate: 'quinticInOut',
         series: [
             {
-                name: '用户关系图',
+                name: title,
                 type: 'graph',
-                layout: 'none',
-                data: node,
-                links: link,
-                // categories: graph.categories,
+                layout: 'circular',
+                circular: {
+                    rotateLabel: true
+                },
+                data: nodes,
+                links: links,
+                categories: categories,
                 roam: true,
                 label: {
                     position: 'right',
@@ -59,15 +87,10 @@ function init_chart() {
                 lineStyle: {
                     color: 'source',
                     curveness: 0.3
-                },
-                emphasis: {
-                    focus: 'adjacency',
-                    lineStyle: {
-                        width: 10
-                    }
                 }
             }
         ]
     };
+
     myChart.setOption(option);
 }
