@@ -68,7 +68,7 @@ function init_option() {
         series: [
             {
                 realtimeSort: true,
-                name: '累计视频数',
+                name: '当月视频数',
                 type: 'bar',
                 data: raw_data[0],
                 label: {

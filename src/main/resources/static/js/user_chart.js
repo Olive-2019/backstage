@@ -13,10 +13,10 @@ function get_node() {
             username_list = data;
             var i = 0;
             for (i = 0; i < data[0].length; ++i) {
-                var ca;
-                if (data[1][i] == '0') ca = 0;
-                else ca = 1;
-                var tmp = {category:ca, name:data[0][i], label : data[0][i]};
+                var ca, symbol_size;
+                if (data[1][i] == '0') ca = 0, symbol_size = 10;
+                else if (data[1][i] == '1') ca = 1, symbol_size = 20;
+                var tmp = {category:ca, name:data[0][i], label : data[0][i], symbolSize: symbol_size};
                 nodes.push(tmp);
             }
         },
