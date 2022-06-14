@@ -34,7 +34,7 @@ public interface HistoryMapper {
     @Select("select count(*) from history where finish=1")
     int get_finish_history_num();
 
-    @Select("select count(*) from (select distinct username from history where time>#{time})")
+    @Select("select count(*) from (select distinct username from history where time>#{time}) as tmp")
     int get_active_user_num(LocalDate time);
 
 }

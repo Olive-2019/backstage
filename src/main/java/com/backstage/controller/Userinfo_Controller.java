@@ -59,7 +59,7 @@ public class Userinfo_Controller {
         int users=userinfoMapper.get_user_num();
         if (users != 0) ret[1]=100*ups/users;
         int finishes=historyMapper.get_finish_history_num();
-        ret[2]=100*finishes/his_num;
+        if (his_num != 0) ret[2]=100*finishes/his_num;
         Date time=new Date(System.currentTimeMillis());
         long daytime=1*24*60*60*1000;
         Date last_week=new Date(time.getTime()-daytime*7);

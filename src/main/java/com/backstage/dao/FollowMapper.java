@@ -13,6 +13,9 @@ public interface FollowMapper {
 
     int deleteByPrimaryKey(Follow key);
 
+    @Select("select * from follow")
+    Follow[] get_all_link();
+
     @Insert("insert into follow values(#{usernamefollowed}, #{usernamefollower})")
     int insert(Follow record);
 

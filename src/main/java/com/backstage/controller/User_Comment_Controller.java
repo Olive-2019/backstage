@@ -1,6 +1,9 @@
 package com.backstage.controller;
 
+import com.backstage.dao.FollowMapper;
 import com.backstage.dao.User_commentMapper;
+import com.backstage.dao.UserinfoMapper;
+import com.backstage.pojo.Follow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +16,31 @@ public class User_Comment_Controller {
     @Autowired
     private User_commentMapper user_commentMapper;
 
+    @Autowired
+    private UserinfoMapper userinfoMapper;
+
+    @Autowired
+    private FollowMapper followMapper;
+
     @RequestMapping("get_user_comment_num")
     public int get_user_comment_num() {
         return user_commentMapper.get_comment_num();
+    }
+    @RequestMapping("get_all_username")
+    public String[] get_all_username() {
+        return userinfoMapper.get_all_username();
+    }
+
+    @RequestMapping("get_all_link")
+    public String[][] get_all_link() {
+        Follow[] link = followMapper.get_all_link();
+        String[][] ans = new String[2][link.length];
+        int i = 0;
+        for (Follow link_one : link) {
+            ans[0][i] = link_one.getUsernamefollowed();
+            ans[1][i] = link_one.getUsernamefollower();
+            i++;
+        }
+        return ans;
     }
 }

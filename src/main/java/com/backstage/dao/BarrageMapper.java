@@ -21,4 +21,7 @@ public interface BarrageMapper {
 
     @Select("select count(*) from barrage")
     int get_barrage_num();
+
+    @Select("select count(*) from barrage where videoID=#{id}")
+    int get_barrage_num_by_id(int id);
 }

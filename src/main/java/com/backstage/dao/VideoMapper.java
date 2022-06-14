@@ -8,6 +8,9 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+import java.util.Map;
+
 @Mapper
 public interface VideoMapper {
     /**
@@ -85,4 +88,19 @@ public interface VideoMapper {
     @Select("select count(*) from (select distinct uploader from video) as tmp")
     int get_up_num();
 
+    @Select("select distinct videoid from video")
+    Integer[] get_all_video_id();
+
+    @Select("select left(uploadtime, 7), ifnull(count(*), 0) from video group by left(uploadtime, 7)")
+    List<List<Map<String, String>>> get_video_uploadtime_month();
+    @Select("select max(left(uploadtime, 7)) from video")
+    String get_max_uploadtime();
+
+    @Select("select min(left(uploadtime, 7)) from video")
+    String get_min_uploadtime();
+    @Select("select distinct left(uploadtime, 7) as ym from video order by ym asc;")
+    String[] get_uploadtime();
+
+    @Select("select cnt from (select ifnull(count(*), 0) as cnt, left(uploadtime, 7) as ym from video group by left(uploadtime, 7)) as tmp where tmp.ym = #{uploadym}")
+    int get_count(String uploadym);
 }

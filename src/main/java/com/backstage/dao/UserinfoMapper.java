@@ -121,6 +121,9 @@ public interface UserinfoMapper {
     @Select("select * from userinfo")
     Userinfo[] get_all_user();
 
+    @Select("select username from userinfo")
+    String[] get_all_username();
+
     @Delete("delete from userinfo where username = #{username}")
     void delete_user(String username);
 
