@@ -103,4 +103,7 @@ public interface VideoMapper {
 
     @Select("select cnt from (select ifnull(count(*), 0) as cnt, left(uploadtime, 7) as ym from video group by left(uploadtime, 7)) as tmp where tmp.ym = #{uploadym}")
     int get_count(String uploadym);
+
+    @Select("select title from video where fieldid = #{field_id}")
+    String[] get_video_title_by_field_id(int field_id);
 }
