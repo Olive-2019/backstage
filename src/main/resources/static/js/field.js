@@ -45,6 +45,7 @@ function delete_record() {
         async: false,
         success: function (data) {
             alert("删除成功");
+
             location.reload();
         },
         error: function (error) {
