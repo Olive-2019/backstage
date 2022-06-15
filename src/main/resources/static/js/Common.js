@@ -10,8 +10,11 @@ function get_url_values(){
     }
     return ret
 }
+var url;
+url = "http://localhost:8881/";
+// url = "http://jt rsr.natappfree.cc/";
 function get_nap(){
-    return "http://localhost:8881/";
+    return url;
 }
 function get_nap_html(){
     return "http://localhost:63342/backstage/static";

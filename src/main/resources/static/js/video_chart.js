@@ -47,7 +47,9 @@ function init_chart1(data) {
                 dataView: { readOnly: false },
                 magicType: { type: ['line', 'bar'] },
                 restore: {},
-                saveAsImage: {}
+                saveAsImage: {
+
+                }
             }
         },
         xAxis: {

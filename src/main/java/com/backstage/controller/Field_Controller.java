@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
@@ -72,6 +73,30 @@ public class Field_Controller {
         for (int i = 0; i < dates.length; ++i) {
             ans[i] = videoMapper.get_video_num_by_cur_time(dates[i]);
         }
+        return ans;
+    }
+
+    @RequestMapping("get_video_like_comment_num_by_fieldname")
+    public int[][] get_video_like_comment_num_by_fieldname(String fieldname) {
+        int[] video_id = fieldMapper.get_videoid_by_fieldname(fieldname);
+        int[][] ans = new int[video_id.length][];
+        for (int i = 0; i  < video_id.length; ++i) {
+            int [] lc = new int[2];
+            lc[0] = fieldMapper.get_video_like_num_by_videoid(video_id[i]);
+            lc[1] = fieldMapper.get_video_commnet_num_by_videoid(video_id[i]);
+            ans[i] = lc;
+        }
+        return ans;
+    }
+
+    @RequestMapping("get_video_like_comment__mean_num_by_fieldname")
+    public int get_video_like_comment__mean_num_by_fieldname(String fieldname) {
+        int[] video_id = fieldMapper.get_videoid_by_fieldname(fieldname);
+        int ans = 0;
+        for (int i = 0; i  < video_id.length; ++i) {
+            ans += fieldMapper.get_video_like_num_by_videoid(video_id[i]);
+        }
+        ans/=video_id.length;
         return ans;
     }
 

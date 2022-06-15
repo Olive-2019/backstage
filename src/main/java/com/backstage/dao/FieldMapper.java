@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 @Mapper
 public interface FieldMapper {
 
@@ -34,4 +36,19 @@ public interface FieldMapper {
 
     @Select("select (IFNULL(max(fieldid), 0)+1) from field")
     int get_next_id();
+
+    @Select("select videoid from field, video where fieldname = #{fieldname} and video.fieldid = field.fieldid order by videoid asc")
+    int[] get_videoid_by_fieldname(String fieldname);
+
+    @Select("select ifnull(count(*), 0) from field, video, user_like where fieldname = #{fieldname} and video.fieldid = field.fieldid and user_like.likeid = videoid group by videoid order by videoid asc;")
+    int[] get_video_like_num_by_fieldname(String fieldname);
+
+    @Select("select ifnull(count(*), 0) from field, video, user_comment where fieldname = #{fieldname} and video.fieldid = field.fieldid and user_comment.commenttoid = videoid group by videoid order by videoid asc;")
+    int[] get_video_comment_num_by_fieldname(String fieldname);
+
+    @Select("select count(*) as li from video, user_like where videoid = #{vid} and user_like.likeid = videoid")
+    int get_video_like_num_by_videoid(int vid);
+
+    @Select("select count(*) as com from video, user_comment  where videoid = #{vid} and user_comment.commenttoid = videoid")
+    int get_video_commnet_num_by_videoid(int vid);
 }
